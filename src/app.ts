@@ -1,39 +1,17 @@
-import Fastify from 'fastify'
+import Fastify, { FastifyBaseLogger, FastifyInstance, FastifyReply, FastifyRequest, FastifySchema, FastifyTypeProviderDefault, RawServerDefault } from 'fastify'
 
 import { login, currencies, currency } from './controllers';
 import { config } from './config/config';
-import middlewareAuth from './auth/middleware';
+import { middlewareAuth } from './auth/middleware';
+import { getRouteCurrencies, getRouteCurrency } from './routes/currency';
 
 
 const fastify = Fastify();
 
 fastify.get('/login', login); // GET - т.к  в данном случае мы ничего не создаем и не обновляем, просто получаем токен
 
-fastify.register(middlewareAuth);
-
-// валидацию лучше вынести в папку validations, но т.к всего два роутера напишу сразу тут
-fastify.get('/currencies', {
-  schema: {
-    querystring: {
-      type: 'object',
-      properties: {
-        limit: { type: 'integer' },
-        page: { type: 'integer' },
-      },
-    },
-  },
-}, currencies);
-
-fastify.get('/currency/:id', {
-  schema: {
-    params: {
-      type: 'object',
-      properties: {
-        id: { type: 'integer' },
-      },
-    },
-  },
-}, currency);
+fastify.register(getRouteCurrencies)
+fastify.register(getRouteCurrency)
 
 const start = async () => {
   try {
