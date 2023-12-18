@@ -1,10 +1,21 @@
-fastify + typeScript + knex + pg
+# Fastify TypeScript Knex PostgreSQL Currency App
 
-слой сервиса решил не делать ради двух ручек
+## Installation and using
 
-Перед выполнение скриптов предварительно нужно сбилдить приложение!!!
-парсинг валют в scripts --- yarn parser:currency
-обновление валют в scripts --- yarn update:currency id rate (yarn updateCurrency 1 200,4)
+```bash
+yarn install
 
+```bash
+yarn build
 
-yarn start -- запуск
+```bash
+yarn start
+
+```bash
+yarn parser:currency
+
+```bash
+yarn updateCurrency <id> <rate>
+
+```bash
+yarn updateCurrency 1 200.4
