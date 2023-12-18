@@ -1,0 +1,9 @@
+# dotenv environment variables file
+.env*
+
+dist
+
+yarn-debug.log*
+yarn-error.log*
+
+node_modules
